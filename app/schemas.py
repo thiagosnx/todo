@@ -5,13 +5,13 @@ from datetime import datetime
 
 class TaskState(str, Enum):
     pendente = "pendente"
-    em_andamento = "em andamento"
+    em_andamento = "em_andamento"
     concluida = "concluida"
 
 class TaskBase(BaseModel):
     titulo: str
     descricao: Optional[str] = None
-    estado : TaskState
+    estado: TaskState
 
 class TaskCreate(TaskBase):
     pass

@@ -6,7 +6,7 @@ from .database import Base
 
 class TaskState(enum.Enum):
     pendente = "pendente"
-    em_andamento = "em andamento"
+    em_andamento = "em_andamento"
     concluida = "concluida"
 
 class Task(Base):
