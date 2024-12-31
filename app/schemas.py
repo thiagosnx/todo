@@ -5,7 +5,7 @@ from datetime import datetime
 
 class TaskState(str, Enum):
     pendente = "pendente"
-    em_andamento = "em_andamento"
+    andamento = "andamento"
     concluida = "concluida"
 
 class TaskBase(BaseModel):
