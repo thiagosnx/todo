@@ -21,6 +21,13 @@ def get_db():
 def read_tasks(db: Session = Depends(get_db)):
     return db.query(Task).all()
 
+@router.get("/{task_id}", response_model=TaskResponse)
+def read_task_by_id(task_id:int, db:Session = Depends(get_db)):
+    db_task = db.query(Task).filter(Task.id == task_id).first()
+    if not db_task:
+        raise HTTPException(status_code=404, detail="Tarefa não encontrada")
+    return db_task
+
 @router.post("/", response_model=TaskResponse)
 def create_task(task: TaskCreate, db:Session = Depends(get_db)):
     new_task = Task(titulo=task.titulo, descricao=task.descricao, estado=task.estado)
@@ -42,3 +49,12 @@ def update_task(task_id: int, task: TaskCreate, db: Session = Depends(get_db)):
     db.refresh(db_task)
     return db_task
 
+@router.delete("/{task_id}")
+def delete_task(task_id: int, db: Session = Depends(get_db)):
+    db_task = db.query(Task).filter(Task.id == task_id).first()
+    if not db_task:
+        raise HTTPException(status_code=404, detail="Tarefa não encontrada")
+    
+    db.delete(db_task)
+    db.commit()
+    return {"message": "Tarefa excluída com sucesso"}
