@@ -2,7 +2,7 @@ from sqlalchemy import Column, Integer, String, DateTime, Enum
 from sqlalchemy.sql import func
 from sqlalchemy.ext.declarative import declarative_base
 import enum
-from .database import Base
+from app.database import Base
 
 class TaskState(enum.Enum):
     pendente = "pendente"

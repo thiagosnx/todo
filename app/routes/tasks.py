@@ -28,7 +28,7 @@ def read_task_by_id(task_id:int, db:Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="Tarefa não encontrada")
     return db_task
 
-@router.post("/", response_model=TaskResponse)
+@router.post("/", response_model=TaskResponse, status_code=201)
 def create_task(task: TaskCreate, db:Session = Depends(get_db)):
     new_task = Task(titulo=task.titulo, descricao=task.descricao, estado=task.estado)
     db.add(new_task)
