@@ -1,8 +1,8 @@
 from datetime import datetime, timedelta
-from jose import jwt, JWTError
-from passlib.context import CryptContext
 from fastapi import HTTPException, Depends
 from fastapi.security import OAuth2PasswordBearer
+from passlib.context import CryptContext
+from jose import jwt, JWTError
 
 KEY = "chaveforte"
 ALGORITHM = "HS256"
