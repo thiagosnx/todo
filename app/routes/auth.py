@@ -1,10 +1,11 @@
 from fastapi import APIRouter, HTTPException, Depends
 from sqlalchemy.orm import Session
-from typing import List
 from app.database import SessionLocal
 from app.models import User
 from app.schemas import UserCreate, UserResponse
-# from app.auth import hash_password
+from fastapi import Depends
+from fastapi.security import OAuth2PasswordRequestForm
+from app.auth import hash_password, create_access_token, verify_password
 
 router = APIRouter()
 
@@ -21,10 +22,21 @@ def create_user(user: UserCreate, db: Session = Depends(get_db)):
     if exists_user:
         raise HTTPException(status_code=400, detail="Usuário já existe")
     
-    hashed_password = user.password
+    hashed_password = hash_password(user.password)
     new_user = User(username=user.username, password=hashed_password)
     db.add(new_user)
     db.commit()
     db.refresh(new_user)
 
     return new_user
+
+@router.post("/token/", tags=["auth"])
+def login(form_data: OAuth2PasswordRequestForm = Depends()):
+    db = SessionLocal()
+    user = db.query(User).filter(User.username == form_data.username).first()
+
+    if not user or not verify_password(form_data.password, user.password):
+        raise HTTPException(status_code=401, detail="Usuário ou senha incorretos")
+
+    access_token = create_access_token(data={"sub": user.username})
+    return {"access_token": access_token, "token_type": "bearer"}

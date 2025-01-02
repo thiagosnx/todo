@@ -22,7 +22,7 @@ class TaskResponse(TaskBase):
     data_atualizacao: Optional[datetime] = None
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class UserCreate(BaseModel):
     username:str
@@ -33,4 +33,4 @@ class UserResponse(BaseModel):
     username: str
 
     class Config: 
-        orm_mode = True
+        from_attributes = True

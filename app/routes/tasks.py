@@ -58,3 +58,5 @@ def delete_task(task_id: int, db: Session = Depends(get_db)):
     db.delete(db_task)
     db.commit()
     return {"message": "Tarefa excluída com sucesso"}
+
+

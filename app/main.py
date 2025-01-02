@@ -6,8 +6,6 @@ from app.routes import auth, tasks
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
-@app.get("/")
-async def root():
-    return RedirectResponse(url="/docs")
+
 app.include_router(auth.router)
 app.include_router(tasks.router)
