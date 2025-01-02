@@ -26,12 +26,17 @@ def test_get_tasks():
         assert "titulo" in tasks[0]
         assert "estado" in tasks[0]
 
-# def test_get_task_by_id():
-#     response = client.post("/tasks/", json=task_data)
-#     assert response.status_code == 201
-#     task_id = response.json()["id"]
+def test_get_task_by_id():
+    response = client.post("/tasks/", json=task_data)
+    assert response.status_code == 201
+    task_id = response.json()["id"]
 
-#     response = client.post(f"tasks/{task_id}", json=task_data)
+    response = client.get(f"/tasks/{task_id}")
+    assert response.status_code == 200
+    task = response.json()
+    assert task["id"] == task_id
+    assert task["titulo"] == task_data["titulo"]
+    assert task["estado"] == task_data["estado"]
 
 def test_update_task():
     response = client.post("/tasks/", json=task_data)
@@ -39,7 +44,8 @@ def test_update_task():
     task_id = response.json()["id"]
 
     updated_data = {"estado": "concluida"}
-    response = client.put(f"tasks/{task_id}", json=updated_data)
+    task_data.update(updated_data)
+    response = client.put(f"tasks/{task_id}", json=task_data)
     assert response.status_code == 200
     updated_task = response.json()
     assert updated_task["estado"] == "concluida"
