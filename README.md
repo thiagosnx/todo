@@ -60,5 +60,6 @@ Esta API RESTful foi desenvolvida em Python utilizando o framework FastAPI para 
     ```bash
    docker exec apis pytest tests/
     ```
+    * Obs: o primeiro teste irá falhar pois é o cenário da criação de um usuário já existente
    
    
