@@ -38,7 +38,7 @@ Esta API RESTful foi desenvolvida em Python utilizando o framework FastAPI para 
 
 2. **Clonar o repositório:**
    ```bash
-   git clone [https://github.com/thiagosnx/todo.git](https://github.com/thiagosnx/todo.git)
+   git clone https://github.com/thiagosnx/todo.git
    ```
 3. **Construir a imagem Docker:**
     ```bash
@@ -57,5 +57,8 @@ Esta API RESTful foi desenvolvida em Python utilizando o framework FastAPI para 
    [http://localhost:9000/docs](http://localhost:9000/docs)
 
 6. **Rodar os testes unitários:**
+    ```bash
    docker exec apis pytest tests/
+    ```
+   
    
