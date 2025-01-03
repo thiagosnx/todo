@@ -54,7 +54,7 @@ Esta API RESTful foi desenvolvida em Python utilizando o framework FastAPI para 
    ```
 
 5. **Acessar a API:**
-   [http://localhost:9000/docs](http://localhost:9000/docs)
+   * [http://localhost:9000/docs](http://localhost:9000/docs)
 
 6. **Rodar os testes unitários:**
     ```bash
